@@ -1,0 +1,89 @@
+server:
+  port: 80
+
+spring:
+  #  jdbc连接
+  datasource:
+    druid:
+      url: jdbc:mysql://10.122.2.78:6033/plancenter?characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+      username: plancenter
+      password: Yuantu123
+  #  redis
+  redis:
+#    排班系统使用的database
+    planDatabase: 3
+    planHost: 10.122.2.110
+    planPassword: yuantu123
+    planPort: 6379
+    database: 8
+    host: 10.122.2.110
+    password: yuantu123
+    port: 6379
+
+
+# sofa 配置
+com:
+  alipay:
+    sofa:
+      tracer:
+        zipkin:
+          # 是否上传zipKin
+          enabled: false
+          base-url: http://47.96.102.55:9411/
+
+# 监控配置
+sea:
+  region: test
+  monitor:
+    enabled: false
+    uri: http://47.99.15.184:31424/api/collector/push
+
+config:
+  dubbo:
+    zk:
+      host: 10.122.2.110:2181
+    service:
+      port: 20884
+    version:
+      plancenter: 1.0.0.uat
+      medicalSkill: 1.0.0.uat
+      doct: 1.0.0.uat
+  # rocketMQ
+  rocketmq:
+    namesrvAddr: 10.122.2.161:9876
+    selfExpireTopicId: medicalSelfExpireUat
+    schOrderStatusChangeTopicId: schOrderStatusChangeUat
+    producer:
+      producerGroup: MedicalSkillMQPushProducer
+    consumer:
+      consumerGroup: MedicalSkillMQPushConsumer
+
+  #  logback 日志级别
+  logback:
+    level: INFO
+    sqlLevel: DEBUG
+    # 日志是否向上传递
+    additivity: true
+  login:
+#    是否模拟登陆，测试时为true不校验登陆
+    isSimulateLogin: true
+
+  oss:
+    paibanOssHost: https://paiban-img.oss-cn-hangzhou.aliyuncs.com/
+    endpoint: http://oss-cn-hangzhou.aliyuncs.com
+    accessKeyId: 8PIhaKLfrSBFvK1f
+    accessKeySecret: uK1uKmOtX2HP91kpVWRixWEiCh933J
+    bucketName: paiban-img
+#  excel模板
+  excelTemplate:
+    ossKey:
+#      检查项目excel模板ossKey
+      examItem: medicalSkillExamItemExcelTemplate.xlsx
+#  邮件发送配置
+  mail:
+    host: smtp.exmail.qq.com
+    port: 465
+    userName: zhangjingwei@yuantutech.com
+    password: Zxc135
+  env:
+    platform: false

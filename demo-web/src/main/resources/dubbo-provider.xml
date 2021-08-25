@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd  ">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="demo-web" />
+    <dubbo:provider filter="dubboLegacySofaTracerFilter,default"/>
+
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry protocol="zookeeper" address="${config.dubbo.zk.host}" />
+
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <dubbo:protocol name="dubbo" port="${config.dubbo.service.port}" host=""  />
+
+    <!-- 声明需要暴露的服务接口 -->
+<!--    <dubbo:service interface="com.yuantu.schedule.client.service.dubbo.medical.TechAppointDubboService" retries="0" timeout="30000"-->
+<!--                   ref="techAppointDubboService" version="${config.dubbo.version.medicalSkill}" />-->
+<!--    <dubbo:service interface="com.yuantu.schedule.client.service.dubbo.medical.TechExamAppointDubboService" retries="2" timeout="30000"-->
+<!--                   ref="techExamAppointDubboService" version="${config.dubbo.version.medicalSkill}" />-->
+
+<!--    <bean id="techAppointDubboService" class="com.yuantu.schedule.medical.skill.service.impl.dubbo.TechAppointDubboServiceImpl" />-->
+<!--    <bean id="techExamAppointDubboService" class="com.yuantu.schedule.medical.skill.service.impl.dubbo.TechExamAppointDubboServiceImpl" />-->
+
+<!--    &lt;!&ndash; 互联网排班相关服务接口 &ndash;&gt;-->
+<!--    <dubbo:service interface="com.yuantu.schedule.client.service.dubbo.internet.InternetAppointDubboService" retries="2" timeout="30000"-->
+<!--                   ref="internetAppointDubboService" version="${config.dubbo.version.medicalSkill}" />-->
+<!--    <bean id="internetAppointDubboService" class="com.yuantu.schedule.medical.skill.service.impl.dubbo.InternetAppointDubboServiceImpl"/>-->
+
+<!--    <dubbo:service interface="com.yuantu.schedule.client.service.dubbo.internet.InternetNumSourceDubboService" retries="2" timeout="30000"-->
+<!--                   ref="internetNumSourceDubboService" version="${config.dubbo.version.medicalSkill}" />-->
+<!--    <bean id="internetNumSourceDubboService" class="com.yuantu.schedule.medical.skill.service.impl.dubbo.InternetNumSourceDubboServiceImpl"/>-->
+
+<!--    <dubbo:service interface="com.yuantu.schedule.client.service.dubbo.internet.InternetScheduleDubboService" retries="2" timeout="30000"-->
+<!--                   ref="internetScheduleDubboService" version="${config.dubbo.version.medicalSkill}" />-->
+<!--    <bean id="internetScheduleDubboService" class="com.yuantu.schedule.medical.skill.service.impl.dubbo.InternetScheduleDubboServiceImpl"/>-->
+</beans>

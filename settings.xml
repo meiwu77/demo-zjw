@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <pluginGroups>
+  </pluginGroups>
+
+  <servers>
+       <server>
+            <id>snapshots</id>
+            <username>admin</username>
+            <password>yuantu123456</password>
+        </server>
+        <server>
+          <id>releases</id>
+          <username>admin</username>
+          <password>yuantu123456</password>
+        </server>
+  </servers>
+
+  <mirrors>
+    <mirror>
+          <id>nexus</id>
+           <name>yuanTu</name>
+          <mirrorOf>*</mirrorOf>
+          <url>http://maven.yuantutech.com:8081/nexus/content/groups/public/</url>
+      </mirror> 
+  </mirrors>
+
+  <profiles>
+    <profile>
+      <id>Bob-nexus-profile</id>
+      <repositories>
+        <repository>
+          <id>Bob-repository-public</id>
+          <url>http://maven.yuantutech.com:8081/nexus/content/groups/public/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>Bob-repository-snapshots</id>
+          <url>http://maven.yuantutech.com:8081/nexus/content/repositories/snapshots/</url>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+    <profile>
+      <id>aliyun-nexus-profile</id>
+      <repositories>
+        <repository>
+          <id>aliyun-repository-public</id>
+          <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+    </profile>
+
+    <profile>
+      <id>jdk-1.7</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+        <jdk>1.7</jdk>
+      </activation>
+      <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.7</maven.compiler.compilerVersion>
+      </properties>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>Bob-nexus-profile</activeProfile>
+  </activeProfiles>
+
+
+</settings>

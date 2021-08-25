@@ -1,0 +1,107 @@
+server:
+  servlet:
+    context-path: /demo-web
+
+    session:
+      persistent: true
+      timeout: 60000s
+      cookie:
+        http-only: false
+  max-http-header-size: 50000000
+  tomcat:
+    uri-encoding: UTF-8
+    max-http-post-size: 10MB
+
+spring:
+  application:
+    name: demo-web
+#  另外使用的配置文件,根据不同环境打包，均为application-other.yml
+  profiles:
+    active: @profiles.config@
+  datasource:
+    druid:
+      driverClassName: com.mysql.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+      maxActive: 30
+      initialSize: 2
+      minIdle: 3
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      maxOpenPreparedStatements: 20
+      logAbandoned: true
+      removeAbandoned: true
+      removeAbandonedTimeout: 180
+      #指向mapper的xml文件位置
+      mapperLocations:
+        - classpath*:com/yuantu/schedule/common/mapper/xml/*.xml
+        - classpath*:META-INF/plan/mybatis/*.xml
+  #  jackson 配置
+  jackson:
+#    jackson时间格式转换
+    date-format: yyyy-MM-dd HH:mm:ss
+#    springboot默认会少8小时，跟时区有关
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+
+  servlet:
+    multipart:
+      enabled: true #是否启用http上传处理
+      max-request-size: 50MB # 总数据的大小
+      max-file-size: 5MB # 单个数据的大小
+
+
+# sofa 配置
+com:
+  alipay:
+    sofa:
+      tracer:
+        samplerName: PercentageBasedSampler
+        samplerPercentage: 0
+        datasource:
+          enable: false
+        zipkin:
+          springmvc:
+            url-patterns:
+              -/*
+
+# 监控配置
+sea:
+  env: pro
+  monitor:
+    endpoint: medskill
+    sample:
+      percent: 100
+    consumer:
+      count: 1
+    send:
+      element:
+        max:
+          count: 200
+      period:
+        time: 20
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  params: count=countSql
+#  page-size-zero: true
+
+fastjson:
+  parser:
+    autoTypeSupport: true
+
+config:
+  env:
+    envName: @profiles.config@
+

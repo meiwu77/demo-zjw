@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+    <property name="LOG_HOME" value="/opt/logs/demo-web" />
+    <!--读取配置，由于logback.xml加载顺序早与application.yml,因此需要使用 springProperty获取配置 -->
+    <springProperty name="LEVEL" source="config.logback.level"/>
+    <springProperty name="SQLLEVEL" source="config.logback.sqlLevel"/>
+    <springProperty name="ADDITIVITY" source="config.logback.additivity"/>
+
+    <!-- 彩色日志格式 -->
+<!--    <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS}[%highlight(%-5level)]%boldYellow(%thread)| %boldGreen(%logger{40}:%line)|[%X{SOFA-TraceId}, %X{SOFA-SpanId}]| %msg %n"/>-->
+    <property name="CONSOLE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS}[%-5level] %thread | %logger{40} | [%X{SOFA-TraceId}, %X{SOFA-SpanId}] | %msg %n"/>
+
+    <!--<property name="CONSOLE_LOG_PATTERN" value="%d - %c -%-4r [%t] %-5p  - %m%n"/>-->
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 按照每天生成日志文件 -->
+    <appender name="YUANTU-LOG"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>${LOG_HOME}/yuantu.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/yuantu.log.%d{yyyy-MM-dd}</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="DEMO_WEB-LOG"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>${LOG_HOME}/demo-web.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/demo-web.log.%d{yyyy-MM-dd}</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+    </appender>
+
+
+    <appender name="PARAMS-LOG"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>${LOG_HOME}/params.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/params.log.%d{yyyy-MM-dd}</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="DUBBO-LOG"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>${LOG_HOME}/dubbo.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/dubbo.log.%d{yyyy-MM-dd}</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="SQL-LOG"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>${LOG_HOME}/sql.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${LOG_HOME}/sql.log.%d{yyyy-MM-dd}</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+    </appender>
+
+
+
+    <!-- 打印入参日志 -->
+    <logger name="com.yuantu.schedule.common.aspectj.ParamLogAspectJ" level="${LEVEL}" additivity="${ADDITIVITY}" >
+        <appender-ref ref="PARAMS-LOG"/>
+    </logger>
+
+    <!-- dubbbo 日志 -->
+    <logger name="com.yuantu.schedule.common.aspectj.DubboServicesLogAspectJ" level="${LEVEL}" additivity="${ADDITIVITY}">
+        <appender-ref ref="DUBBO-LOG"/>
+    </logger>
+    <logger name="com.alibaba.dubbo"  level="${LEVEL}" additivity="${ADDITIVITY}">
+        <appender-ref ref="DUBBO-LOG"/>
+    </logger>
+
+
+    <!-- 打印sql 语句 -->
+    <logger name="com.yuantu.plancenter.dao" level="${SQLLEVEL}" additivity="${ADDITIVITY}">
+        <appender-ref ref="SQL-LOG"/>
+    </logger>
+
+    <!-- 打印medical包下的日志 -->
+    <logger name="com.yuantu.demo" level="${LEVEL}" additivity="${ADDITIVITY}">
+        <appender-ref ref="DEMO_WEB-LOG"/>
+    </logger>
+
+
+    <!-- 打印com.yuantu包下的日志 -->
+    <logger name="com.yuantu" level="${LEVEL}" additivity="${ADDITIVITY}">
+        <appender-ref ref="YUANTU-LOG"/>
+    </logger>
+
+    <logger name="com.github.spy.sea" level="${LEVEL}" additivity="${ADDITIVITY}">
+        <appender-ref ref="DEMO_WEB-LOG"/>
+    </logger>
+
+    <!-- 控制台打印日志 -->
+    <root level="${LEVEL}">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

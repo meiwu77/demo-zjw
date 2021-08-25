@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+		"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+
+<generatorConfiguration>
+	<context id="context" targetRuntime="MyBatis3">
+		<property name="javaFileEncoding" value="UTF-8"/>
+
+		<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+			<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+			<property name="caseSensitive" value="true"/>
+			<property name="forceAnnotation" value="true"/>
+			<property name="beginningDelimiter" value="`"/>
+			<property name="endingDelimiter" value="`"/>
+			<!--<property name="generateColumnConsts" value="true"/>-->
+			<!--<property name="useMapperCommentGenerator" value="false"/>-->
+			<property name="lombok" value="Getter,Setter,ToString"/>
+		</plugin>
+
+		<commentGenerator >
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+						connectionURL="jdbc:mysql://10.122.2.78:6033/plancenter?useSSL=false&amp;tinyInt1isBit=false"
+						userId="plancenter"
+						password="Yuantu123" />
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.yuantu.schedule.common.common.entity"
+							targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.yuantu.schedule.common.mapper.xml"
+						 targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+							 targetPackage="com.yuantu.schedule.common.mapper"
+							 targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+
+
+		<!--<table domainObjectName="TechCorp"  tableName="tech_corp"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>-->
+
+
+		<!--<table domainObjectName="TechEquipItem"  tableName="tech_equip_item"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+
+
+		<table domainObjectName="TechEquipment"  tableName="tech_equipment"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table domainObjectName="TechExamAppoint"  tableName="tech_exam_appoint"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table domainObjectName="TechExamItem"  tableName="tech_exam_item"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table domainObjectName="TechExamType"  tableName="tech_exam_type"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table domainObjectName="TechNumSource"  tableName="tech_num_source"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table domainObjectName="TechSchOrder"  tableName="tech_sch_order"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table domainObjectName="TechSchResult"  tableName="tech_sch_result"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table domainObjectName="TechSchResultChannel"  tableName="tech_sch_result_channel"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table domainObjectName="TechSchRule"  tableName="tech_sch_rule"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table domainObjectName="TechSchRuleChannel"  tableName="tech_sch_rule_channel"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>-->
+        <!--<table domainObjectName="TechExamParts"  tableName="tech_exam_parts"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>-->
+		<table domainObjectName="TechExamTemplate"  tableName="tech_exam_template"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+		<table domainObjectName="TechExamTemplateDetail"  tableName="tech_exam_template_detail"
+			   enableCountByExample="false"
+			   enableUpdateByExample="false"
+			   enableDeleteByExample="false"
+			   enableSelectByExample="false"
+			   selectByExampleQueryId="false">
+			<generatedKey column="id" sqlStatement="MySql" identity="true" />
+		</table>
+
+
+	</context>
+</generatorConfiguration>

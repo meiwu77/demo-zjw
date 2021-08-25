@@ -1,0 +1,9 @@
+demo-web/target/
+demo-web/disconf
+/.idea
+
+/.project
+/.classpath
+/.settings
+/logs
+*.iml
