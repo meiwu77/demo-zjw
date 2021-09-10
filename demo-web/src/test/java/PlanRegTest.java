@@ -32,14 +32,21 @@ public class PlanRegTest {
         String corpCode = "3702011121";
         Date nowDate = new Date();
 
-        String startDateStr = DateUtil.yyyyMMddhhmmss(DateUtil.minusDay(nowDate,10));
-        String endDateStr = DateUtil.yyyyMMddhhmmss(nowDate);
+//        String startDateStr = DateUtil.yyyyMMddhhmmss(DateUtil.minusDay(nowDate,10));
+//        String endDateStr = DateUtil.yyyyMMddhhmmss(nowDate);
+
+        String startDateStr = "2021-09-03";
+        String endDateStr = "2021-11-03";
+
 
         RequestAppointRegParams request = new RequestAppointRegParams();
         request.setOffline(true);
         request.setCorpCode(corpCode);
-        request.setIdNo("412725199010108336");
-        request.setName("张静伟");
+//        request.setIdNo("412725199010108336");
+//        request.setName("张静伟");
+        request.setCardType(24);
+        request.setCardNo("311A8F21822042A269BF5A111F3F9FAC87C529517B91B48EC73C0A26CFF10DCA:1");
+
 
         request.setStartDate(startDateStr);
         request.setEndDate(endDateStr);

@@ -98,11 +98,15 @@ skill:
 
 offline:
   useOffline: true
-  plan:
-    url: http://plan-uat.yuantutech.com
   corpCode:
     list: 3702011121
   redisson:
     address: redis://10.122.2.110:6379
     password: yuantu123
     database: 8
+
+
+sdk:
+  plan:
+    center:
+      domain: http://plan-uat.yuantutech.com

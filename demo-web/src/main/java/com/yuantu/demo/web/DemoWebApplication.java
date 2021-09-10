@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@ImportResource(value={"classpath*:dubbo-*.xml"})
 @EnableTransactionManagement
 @SpringBootApplication(
-		scanBasePackages = {"com.yuantu.demo.web","com.yuantu.plancenter.config"}
+		scanBasePackages = {"com.yuantu.demo.web"/*,"com.yuantu.plancenter.config"*/}
 )
 public class DemoWebApplication {
 
